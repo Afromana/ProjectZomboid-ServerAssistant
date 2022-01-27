@@ -1,0 +1,11 @@
+{
+  "zomboidPath": "",
+  "docPath": "",
+  "serverName": "",
+  "notifyUser": 0,
+  "notifyChannel": 0,
+  "chatChannel": 0,
+  "joinNotif": true,
+  "deathNotif": true,
+  "botToken": ""
+}
