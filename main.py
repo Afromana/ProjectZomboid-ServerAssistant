@@ -73,7 +73,7 @@ async def modcheck():
             print("Detected mod update!")
             with open("moddata.json", "w") as f:  # Save the updated workshop data to our file for later comparison
                 json.dump(checkresults, f)
-            ch = bot.get_channel(cChannel)  # Yell in this Discord channel
+            ch = bot.get_channel(nChannel)  # Yell in this Discord channel
             await ch.send(f"""<@{nUser}> Mod updated! {value["title"]}""")
 
 @bot.command()
