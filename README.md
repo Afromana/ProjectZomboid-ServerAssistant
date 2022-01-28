@@ -4,6 +4,8 @@ A Python based Discord bot made for my own private server with friends, which is
 
 This is probably not the most user friendly at the moment, and will go through some iterations, but this first release is in an attempt to get it out to those who seem to particularly need it at the moment.
 
+Needs at the least Python 3.6
+
 Library dependencies:
 ```
 discord.py
