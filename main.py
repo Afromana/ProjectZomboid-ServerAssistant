@@ -74,7 +74,7 @@ async def modcheck():
             with open("moddata.json", "w") as f:  # Save the updated workshop data to our file for later comparison
                 json.dump(checkresults, f)
             ch = bot.get_channel(nChannel)  # Yell in this Discord channel
-            await ch.send(f"""<@{nUser}> Mod updated! {value["title"]}""")
+            await ch.send(f"""<@{nUser}> Mod updated! `{value["title"]}`""")
 
 @bot.command()
 async def modlist(ctx):
@@ -123,10 +123,13 @@ async def deaths(ctx):
         #embed.set_image(url="https://cdn.discordapp.com/attachments/390989307680391168/925506790001606667/scrungo.png")  # Scrungo
         await ctx.send(embed=embed)
 
+errorCalled = False
+
 @loop(seconds=1)
 async def connectioncheck():
     global rfile
     global openedFile
+    global errorCalled
     if rfile == None:
         try:
             list_of_files = glob.glob(dPath+r'Logs/*.txt')
@@ -136,8 +139,11 @@ async def connectioncheck():
             openedFile = latest_file
             rfile.seek(0, 2)
             print("Loaded User log file")
+            errorCalled = False
         except Exception as e:
-            print(f"Failed to load User log file!\n{e}")
+            if not errorCalled:
+                print(f"Failed to load User log file!\nDid the server restart?\nWaiting for user join...")
+                errorCalled = True
             return
     else:
         list_of_files = glob.glob(dPath + r'Logs/*.txt')
@@ -148,7 +154,8 @@ async def connectioncheck():
             rfile = open(latest_file, 'r', encoding="UTF-8")
             rfile.seek(0, 2)
             openedFile = latest_file
-            print("Loaded new User file")
+            print("Loaded new User log file")
+            errorCalled = False
     fileLine = rfile.readline()
     message = fileLine
     if not fileLine:
