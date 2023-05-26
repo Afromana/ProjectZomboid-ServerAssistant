@@ -8,7 +8,8 @@ import os
 import re
 import requests
 
-bot = commands.Bot(command_prefix='?', case_insensitive=True)
+intents = discord.Intents.all()
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 with open('config.json') as f:
     config = json.load(f)
